@@ -1,0 +1,36 @@
+-- This script gives the player invincibility, making them immune to all damage
+
+local player = game.Players.LocalPlayer
+local character = player.Character
+local humanoid = character:WaitForChild("Humanoid")
+
+-- This function sets the player's health to the maximum value, effectively making them invincible
+local function giveInvincibility()
+    while true do
+        humanoid.Health = humanoid.MaxHealth
+        wait(0.1)
+    end
+end
+
+-- This function checks if the player is alive, and if they are, it calls the giveInvincibility function
+local function checkPlayerStatus()
+    while true do
+        if humanoid.Health > 0 then
+            giveInvincibility()
+        end
+        wait(1)
+    end
+end
+
+-- This function checks if the player's character has been loaded, and if it has, it calls the checkPlayerStatus function
+local function checkCharacterLoaded()
+    while true do
+        if character ~= nil then
+            checkPlayerStatus()
+        end
+        wait(0.5)
+    end
+end
+
+-- This function starts the checkCharacterLoaded function when the script is run
+checkCharacterLoaded()
